@@ -3,3 +3,4 @@ Release/*
 *.vcxproj
 *.filters
 *.user
+*.lnk
