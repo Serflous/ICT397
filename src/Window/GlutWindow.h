@@ -7,6 +7,8 @@
 	#include <GLUT/glut.h>
 #endif
 
+#include "../Input/InputManager.h"
+
 class GlutWindow
 {
 public:
@@ -15,7 +17,14 @@ public:
 	int InitializeGlutWindow(int * argc, char ** argv);
 	void BeginMainGameLoop();
 	void DrawCallback();
+	void ReshapeCallback(int w, int h);
 	static void StaticDrawCallback();
+	static void StaticReshapeCallback(int w, int h);
+
+	static void StaticKeyboardCallback(unsigned char key, int x, int y);
+	static void StaticKeyboardUpCallback(unsigned char key, int x, int y);
+	static void StaticSpecialKeyboardCallback(int key, int x, int y);
+	static void StaticSpecialKeyboardUpCallback(int key, int x, int y);
 private:
 	GlutWindow();
 	~GlutWindow();
