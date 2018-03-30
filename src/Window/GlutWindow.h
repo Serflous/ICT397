@@ -25,6 +25,8 @@ public:
 	static void StaticKeyboardUpCallback(unsigned char key, int x, int y);
 	static void StaticSpecialKeyboardCallback(int key, int x, int y);
 	static void StaticSpecialKeyboardUpCallback(int key, int x, int y);
+	static void StaticMouseCallback(int button, int state, int x, int y);
+	static void StaticMousePositionCallback(int x, int y);
 private:
 	GlutWindow();
 	~GlutWindow();

@@ -17,6 +17,10 @@ InputManager::InputManager()
 	{
 		m_keys[i] = KS_KEY_RELEASED;
 	}
+	for (int i = 0; i < 3; i++)
+	{
+		m_buttonState[i] = BS_BUTTON_UP;
+	}
 }
 
 InputManager::~InputManager()
@@ -40,4 +44,28 @@ void InputManager::KeyCallback(int key, bool press)
 {
 	m_keys[key] = press ? KS_KEY_PRESSED : KS_KEY_RELEASED;
 	std::cout << "KeyCallback: " << key << " - " << m_keys[key] << std::endl;
+}
+
+void InputManager::MouseCallback(int button, int state, int x, int y)
+{
+	m_x = x;
+	m_y = y;
+	m_buttonState[button] = state == GLUT_DOWN ? BS_BUTTON_DOWN : BS_BUTTON_UP;
+}
+
+void InputManager::MouseMotionCallback(int x, int y)
+{
+	m_x = x;
+	m_y = y;
+}
+
+void InputManager::GetMousePosition(int & x, int & y)
+{
+	x = m_x;
+	y = m_y;
+}
+
+ButtonState InputManager::GetButtonState(int button)
+{
+	return m_buttonState[button];
 }

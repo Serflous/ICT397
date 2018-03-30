@@ -40,6 +40,9 @@ int GlutWindow::InitializeGlutWindow(int * argc, char ** argv)
 	glutKeyboardUpFunc(StaticKeyboardUpCallback);
 	glutSpecialFunc(StaticSpecialKeyboardCallback);
 	glutSpecialUpFunc(StaticSpecialKeyboardUpCallback);
+	glutMouseFunc(StaticMouseCallback);
+	glutMotionFunc(StaticMousePositionCallback);
+	glutPassiveMotionFunc(StaticMousePositionCallback);
 	glClearColor(0.3922f, 0.5843f, 0.9294f, 1.0f);
 	return 0;
 }
@@ -50,6 +53,7 @@ void GlutWindow::DrawCallback()
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+
 
 	glBegin(GL_TRIANGLES);
 		glColor3f(0.4039f, 0.7373f, 0.6314f);
@@ -70,7 +74,7 @@ void GlutWindow::ReshapeCallback(int w, int h)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glViewport(0, 0, w, h);
-	gluPerspective(45, aspectRatio, 1, 1000);
+	gluPerspective(45, aspectRatio, 0.1f, 10000);
 	glMatrixMode(GL_MODELVIEW);
 }
 
@@ -107,4 +111,14 @@ void GlutWindow::StaticSpecialKeyboardCallback(int key, int x, int y)
 void GlutWindow::StaticSpecialKeyboardUpCallback(int key, int x, int y)
 {
 	InputManager::GetInstance()->KeyCallback(127 + key, false);
+}
+
+void GlutWindow::StaticMouseCallback(int button, int state, int x, int y)
+{
+	InputManager::GetInstance()->MouseCallback(button, state, x, y);
+}
+
+void GlutWindow::StaticMousePositionCallback(int x, int y)
+{
+	InputManager::GetInstance()->MouseMotionCallback(x, y);
 }
