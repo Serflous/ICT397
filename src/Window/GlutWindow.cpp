@@ -44,6 +44,7 @@ int GlutWindow::InitializeGlutWindow(int * argc, char ** argv)
 	glutMotionFunc(StaticMousePositionCallback);
 	glutPassiveMotionFunc(StaticMousePositionCallback);
 	glClearColor(0.3922f, 0.5843f, 0.9294f, 1.0f);
+	glEnable(GL_TEXTURE_2D);
 	return 0;
 }
 
@@ -54,14 +55,22 @@ void GlutWindow::DrawCallback()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
+	m_tex.BindTexture();
 
 	glBegin(GL_TRIANGLES);
-		glColor3f(0.4039f, 0.7373f, 0.6314f);
-		glVertex3f(0.0f, 0.5f, -5);
-		glColor3f(0.5882f, 0.1294f, 0.2118f);
+		glTexCoord2f(0, 0);
+		glVertex3f(-0.5f, 0.5f, -5);
+		glTexCoord2f(1, 1);
 		glVertex3f(0.5f, -0.5f, -5);
-		glColor3f(0.2235f, 0.302f, 0.5176f);
+		glTexCoord2f(0, 1);
 		glVertex3f(-0.5f, -0.5f, -5);
+
+		glTexCoord2f(0, 0);
+		glVertex3f(-0.5f, 0.5f, -5);
+		glTexCoord2f(1, 0);
+		glVertex3f(0.5f, 0.5f, -5);
+		glTexCoord2f(1, 1);
+		glVertex3f(0.5f, -0.5f, -5);
 	glEnd();
 
 	glutSwapBuffers();
@@ -78,8 +87,9 @@ void GlutWindow::ReshapeCallback(int w, int h)
 	glMatrixMode(GL_MODELVIEW);
 }
 
-void GlutWindow::BeginMainGameLoop()
+void GlutWindow::BeginMainGameLoop(Texture tex)
 {
+	m_tex = tex;
 	glutMainLoop();
 }
 

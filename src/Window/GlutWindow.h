@@ -8,6 +8,7 @@
 #endif
 
 #include "../Input/InputManager.h"
+#include "../Objects/Texture.h"
 
 class GlutWindow
 {
@@ -15,7 +16,7 @@ public:
 	static GlutWindow * GetInstance();
 
 	int InitializeGlutWindow(int * argc, char ** argv);
-	void BeginMainGameLoop();
+	void BeginMainGameLoop(Texture tex);
 	void DrawCallback();
 	void ReshapeCallback(int w, int h);
 	static void StaticDrawCallback();
@@ -37,6 +38,8 @@ private:
 	const int INIT_WINDOW_POS_X = -1;
 	const int INIT_WINDOW_POS_Y = -1;
 	const char * WINDOW_TITLE = "ICT397 Game";
+
+	Texture m_tex;
 
 	static GlutWindow * m_instance;
 };
