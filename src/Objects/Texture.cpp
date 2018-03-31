@@ -39,3 +39,8 @@ int Texture::GetTextureId()
 {
 	return m_textureId;
 }
+
+void Texture::Destroy()
+{
+	glDeleteTextures(1, &m_textureId);
+}

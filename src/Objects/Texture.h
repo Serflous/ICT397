@@ -14,13 +14,14 @@ public:
 
 	void BindTexture();
 	void Unbind();
+	void Destroy();
 
 	void SetTextureId(int texId);
 	int GetTextureId();
 private:
 
 private:
-	int m_textureId;
+	GLuint m_textureId;
 };
 
 #endif
